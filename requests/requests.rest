@@ -14,3 +14,22 @@ Content-Type: application/json
   "name": "Daniel",
   "number": "123456789"
 }
+
+###
+GET http://secure-depths-75434.herokuapp.com/api/persons
+
+###
+GET https://secure-depths-75434.herokuapp.com/api/persons/4
+
+###
+POST https://secure-depths-75434.herokuapp.com/api/persons
+Content-Type: application/json
+
+{
+  "name": "Daniel",
+  "number": "123456789"
+}
+
+###
+DELETE https://secure-depths-75434.herokuapp.com/api/persons/6795629
+
