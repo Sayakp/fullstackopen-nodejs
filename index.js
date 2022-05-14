@@ -2,6 +2,8 @@ const express = require("express");
 const morgan = require("morgan")
 const app = express();
 
+app.use(express.static("build"))
+
 morgan.token('post-data', (request, response) => {
     if (request.method === 'POST'){
         return JSON.stringify(request.body)
