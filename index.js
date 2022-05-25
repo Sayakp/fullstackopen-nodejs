@@ -1,6 +1,9 @@
+require("dotenv").config()
 const express = require("express");
 const morgan = require("morgan")
 const app = express();
+
+const Person = require("./models/person")
 
 app.use(express.static("build"))
 
@@ -40,31 +43,29 @@ let persons = [
 ]
 
 app.get("/api/persons", (request, response)=> {
-    response.json(persons)
+    Person.find({}).then(persons=>{
+        response.json(persons)
+    })
 })
 
 app.post('/api/persons', (request, response)=>{
     const body = request.body
 
-    let error_message = null
-    if (!body.name || !body.number)error_message="missing name or number"
-    if (persons.some(person => person.name===body.name))error_message="The name already exists in the phonebook"
-
-    if (error_message){
+    if (!body.name || !body.number){
         return response.status(400).json(
             {
-                error: error_message
+                error: "missing name or number"
             }
         )
     }
 
-    const newPerson = {
-        "id": Math.floor(Math.random()*10000000),
+    const person = new Person({
         "name": body.name,
         "number": body.number,
-    }
-    persons = persons.concat(newPerson)
-    response.json(newPerson)
+    })
+    person.save().then(newPerson=>{
+        response.json(newPerson)
+    })
 })
 
 app.get("/info", (request, response)=>{
@@ -95,6 +96,7 @@ app.put('/api/persons/:id', (request, response)=>{
 
 })
 
-const PORT = process.env.PORT || 3001
-app.listen(PORT)
-console.log(`Server running on ${PORT}`)
+const PORT = process.env.PORT
+app.listen(PORT, ()=>{
+    console.log(`Server running on ${PORT}`)
+})
