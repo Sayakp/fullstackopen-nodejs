@@ -12,23 +12,23 @@ Content-Type: application/json
 
 {
   "name": "Daniel",
-  "number": "123456789"
+  "number": "12345678"
 }
 
 ###
-PUT http://localhost:3001/api/persons/62911a731752b186a1fc483f
+PUT http://localhost:3001/api/persons/62915d17fe6e39c9dfc4ab6b
 Content-Type: application/json
 
 {
-  "name": "New name",
-  "number": "123-456-789"
+  "name": "Daniel",
+  "number": "123-562323278"
 }
 
 ###
 GET http://secure-depths-75434.herokuapp.com/api/persons
 
 ###
-GET https://secure-depths-75434.herokuapp.com/api/persons/4
+GET https://secure-depths-75434.herokuapp.com/api/persons/6291326e2a56bfb331491af5
 
 ###
 POST https://secure-depths-75434.herokuapp.com/api/persons
